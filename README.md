@@ -32,4 +32,4 @@ This project addresses the spectral classification of Chandrayaan-2 Imaging Infr
 - Provides insights into lunar geological features and mineral composition
 - Demonstrates the effectiveness of ML in processing hyperspectral data
 
-For more details on the Bharatiya Antariksh Hackathon 2024, visit [ISRO's official website](https://www.isro.gov.in/).
+For more details on the Bharatiya Antariksh Hackathon 2024, visit (https://isro.hack2skill.com/2024/).
