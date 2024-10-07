@@ -5,8 +5,6 @@
 This project addresses the spectral classification of Chandrayaan-2 Imaging Infrared Spectrometer (IIRS) data using AI/ML techniques to enhance our understanding of the Moon's geological diversity. Developed for the ISRO Bharatiya Antariksh Hackathon 2024, our solution combines advanced data processing, machine learning, and visualization to analyze lunar spectral data.
 
 ## Key Features
-
-- Advanced noise reduction using Isolation Forest and Gaussian Mixture Model
 - Holistic integration of spectral analysis with spatial visualization
 - Accurate geolocation for precise mapping of lunar features
 - User-friendly GUI for data exploration and analysis
