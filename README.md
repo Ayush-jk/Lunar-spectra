@@ -1,33 +1,62 @@
 # Spectral Classification of Chandrayaan-2 IIRS Data
 
 ## Project Overview
-
-This project addresses the spectral classification of Chandrayaan-2 Imaging Infrared Spectrometer (IIRS) data using AI/ML techniques to enhance our understanding of the Moon's geological diversity. Developed for the ISRO Bharatiya Antariksh Hackathon 2024, our solution combines advanced data processing, machine learning, and visualization to analyze lunar spectral data.
+This project focuses on the spectral classification of Chandrayaan-2 Imaging Infrared Spectrometer (IIRS) data using machine learning techniques to enhance our understanding of the Moon's geological diversity. The solution combines advanced data processing, dimensionality reduction, clustering, deep learning, and visualization to analyze and classify lunar hyperspectral data.
 
 ## Key Features
-- Holistic integration of spectral analysis with spatial visualization
-- Accurate geolocation for precise mapping of lunar features
-- User-friendly GUI for data exploration and analysis
-- Comprehensive toolset utilizing QGIS, MATLAB, Python, and Orfeo Toolbox
+- Processing and visualization of complex hyperspectral data 
+- Dimensionality reduction using Principal Component Analysis
+- Unsupervised clustering to identify distinct spectral classes
+- CNN-based classification of lunar surface materials
+- Visualization of spectral signatures and geological interpretation
+- Mapping of classified results to lunar coordinates
 
 ## Technical Approach
 
-1. **Data Processing:** Acquisition and preparation of IIRS data from ISSDC
-2. **Spatial Analysis:** Overlay of IIRS data on lunar basemap using MATLAB
-3. **Spectral Analysis:** Extraction and plotting of spectral profiles
-4. **Machine Learning:** Application of CNNs for spectral classification
-5. **Visualization:** Integration of results using MATLAB, Python, and QGIS
+### Data Processing
+- Loading and verification of IIRS hyperspectral data (.qub format)
+- Extraction of metadata from header files (.hdr format)
+- Normalization and reshaping of high-dimensional spectral data
+
+### Dimensionality Reduction
+- Application of PCA to reduce 256 spectral bands to 10 principal components
+- Preservation of ~96% of original data variance in the reduced space
+
+### Machine Learning Pipeline
+- Unsupervised K-means clustering to identify 5 distinct spectral classes
+- Development of a CNN model with the following architecture:
+  - Multiple convolutional layers (32 and 64 filters)
+  - Max pooling layers
+  - Dense layers for classification
+- Training and validation with ~98-99% accuracy
+
+### Visualization and Analysis
+- Plotting of reflectance spectra at user-selected coordinates
+- Display of lunar surface at various wavelength bands
+- Generation of classified lunar surface maps
+- Extraction and interpretation of spectral signatures for each class
+- Geographical mapping of spectral classes
 
 ## Technologies Used
+- Python for all data processing and analysis
+- Google Colab as the development environment
+- Libraries:
+  - `spectral` for hyperspectral data processing
+  - NumPy, Pandas for data manipulation
+  - Matplotlib for visualization
+  - scikit-learn for PCA and K-means clustering
+  - TensorFlow/Keras for CNN implementation
 
-- Python (NumPy, Pandas, SciPy, scikit-learn, PyQt)
-- MATLAB (Image Processing Toolbox, Statistics and Machine Learning Toolbox)
-- QGIS for geospatial visualization
-- TensorFlow/Keras for deep learning models
+## Results and Interpretation
+The project successfully classified the lunar surface into five distinct classes:
+1. **Mare Basalt**: Dark volcanic plains rich in iron and magnesium
+2. **Highland Anorthosite**: Bright, ancient crustal material rich in calcium-plagioclase
+3. **Impact Melt**: Material melted and re-solidified during meteor impacts
+4. **Pyroclastic Deposit**: Volcanic ash and glass from explosive eruptions
+5. **Mixed Terrain**: Areas with heterogeneous composition
 
 ## Impact and Applications
-
 - Provides insights into lunar geological features and mineral composition
-- Demonstrates the effectiveness of ML in processing hyperspectral data
-
-For more details on the Bharatiya Antariksh Hackathon 2024, visit (https://isro.hack2skill.com/2024/).
+- Demonstrates the effectiveness of machine learning in processing hyperspectral data
+- Creates a reusable pipeline for planetary remote sensing data analysis
+- Supports future lunar exploration missions through improved understanding of surface composition
