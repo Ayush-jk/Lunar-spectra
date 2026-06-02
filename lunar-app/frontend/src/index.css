@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+
+body {
+  background: #FAFAF2;
+  color: #1A1A1A;
+  font-family: 'Epilogue', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Subtle grid paper texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,26,26,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,26,26,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Card component */
+.card {
+  background: #fff;
+  border: 2px solid #1A1A1A;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0px #1A1A1A;
+}
+
+.card-orange {
+  background: #fff;
+  border: 2px solid #1A1A1A;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0px #E8500A;
+}
+
+.card-blue {
+  background: #fff;
+  border: 2px solid #1A1A1A;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0px #2D5BE3;
+}
+
+/* Tag pill */
+.tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1.5px solid #1A1A1A;
+  border-radius: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #FAFAF2; }
+::-webkit-scrollbar-thumb { background: #1A1A1A; border-radius: 0; }
+
+/* Selection */
+::selection { background: #F2C94C; color: #1A1A1A; }

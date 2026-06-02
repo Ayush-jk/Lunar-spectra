@@ -1,0 +1,21 @@
+@"
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pkl
+*.h5
+
+# Node
+node_modules/
+dist/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+"@ | Out-File -FilePath .gitignore -Encoding utf8

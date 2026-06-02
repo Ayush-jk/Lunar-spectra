@@ -1,62 +1,61 @@
-# Spectral Classification of Chandrayaan-2 IIRS Data
+# Lunar Spectra
 
-## Project Overview
-This project focuses on the spectral classification of Chandrayaan-2 Imaging Infrared Spectrometer (IIRS) data using machine learning techniques to enhance our understanding of the Moon's geological diversity. The solution combines advanced data processing, dimensionality reduction, clustering, deep learning, and visualization to analyze and classify lunar hyperspectral data.
+Spectral classification of Chandrayaan-2 IIRS hyperspectral data using PCA, K-Means, and a CNN. Classifies the lunar surface into 5 mineralogical classes with 98.84% accuracy.
 
-## Key Features
-- Processing and visualization of complex hyperspectral data 
-- Dimensionality reduction using Principal Component Analysis
-- Unsupervised clustering to identify distinct spectral classes
-- CNN-based classification of lunar surface materials
-- Visualization of spectral signatures and geological interpretation
-- Mapping of classified results to lunar coordinates
+## What it does
 
-## Technical Approach
+Takes raw IIRS scene files (.qub + .hdr) and produces a full classified surface map. Each pixel is assigned one of 5 spectral classes based on its reflectance signature across 256 bands (800nm to 5000nm).
 
-### Data Processing
-- Loading and verification of IIRS hyperspectral data (.qub format)
-- Extraction of metadata from header files (.hdr format)
-- Normalization and reshaping of high-dimensional spectral data
+The 5 classes are validated using continuum-removal band depth analysis at 1µm and 2µm, the standard diagnostic absorption features for lunar minerals.
 
-### Dimensionality Reduction
-- Application of PCA to reduce 256 spectral bands to 10 principal components
-- Preservation of ~96% of original data variance in the reduced space
+## Pipeline
 
-### Machine Learning Pipeline
-- Unsupervised K-means clustering to identify 5 distinct spectral classes
-- Development of a CNN model with the following architecture:
-  - Multiple convolutional layers (32 and 64 filters)
-  - Max pooling layers
-  - Dense layers for classification
-- Training and validation with ~98-99% accuracy
+```
+Raw IIRS .qub + .hdr
+  → Normalize → PCA (256 bands → 10 components, 98.3% variance retained)
+  → K-Means clustering (k=5, labels for training)
+  → CNN classifier (98.84% random split, 98.75% spatial generalization)
+  → Classified surface map + spectral validation
+```
 
-### Visualization and Analysis
-- Plotting of reflectance spectra at user-selected coordinates
-- Display of lunar surface at various wavelength bands
-- Generation of classified lunar surface maps
-- Extraction and interpretation of spectral signatures for each class
-- Geographical mapping of spectral classes
+## Results
 
-## Technologies Used
-- Python for all data processing and analysis
-- Google Colab as the development environment
-- Libraries:
-  - `spectral` for hyperspectral data processing
-  - NumPy, Pandas for data manipulation
-  - Matplotlib for visualization
-  - scikit-learn for PCA and K-means clustering
-  - TensorFlow/Keras for CNN implementation
+| Metric | Value |
+|---|---|
+| Random split accuracy | 98.84% |
+| Spatial generalization | 98.75% |
+| Band depth validation | ✓ confirmed |
 
-## Results and Interpretation
-The project successfully classified the lunar surface into five distinct classes:
-1. **Mare Basalt**: Dark volcanic plains rich in iron and magnesium
-2. **Highland Anorthosite**: Bright, ancient crustal material rich in calcium-plagioclase
-3. **Impact Melt**: Material melted and re-solidified during meteor impacts
-4. **Pyroclastic Deposit**: Volcanic ash and glass from explosive eruptions
-5. **Mixed Terrain**: Areas with heterogeneous composition
+Spatial test: trained on top half of orbital strip, tested on bottom half. 0.09% drop confirms the model learned spectral features, not pixel position.
 
-## Impact and Applications
-- Provides insights into lunar geological features and mineral composition
-- Demonstrates the effectiveness of machine learning in processing hyperspectral data
-- Creates a reusable pipeline for planetary remote sensing data analysis
-- Supports future lunar exploration missions through improved understanding of surface composition
+## Repo structure
+
+```
+modules/              Modular pipeline (run via main.ipynb)
+  01_data_loading
+  02_eda
+  03_preprocessing
+  04_clustering
+  05_classification
+  06_analysis
+lunar-app/            Web interface
+  backend/            FastAPI + ML inference
+  frontend/           React + Recharts
+main.ipynb            Runs full pipeline in sequence
+```
+
+## Web app
+
+FastAPI backend + React frontend. Upload any IIRS scene and get back a classified map, pixel-level inspection, and spectral validation charts.
+
+```bash
+# Backend
+cd lunar-app/backend && uvicorn main:app --reload
+
+# Frontend
+cd lunar-app/frontend && npm install && npm run dev
+```
+
+## Stack
+
+Python, TensorFlow, scikit-learn, spectral, FastAPI, React, Recharts, Google Colab
